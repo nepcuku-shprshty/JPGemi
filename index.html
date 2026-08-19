@@ -24,7 +24,6 @@
 </head>
 <body class="bg-slate-950 font-sans min-h-screen text-slate-100">
 
-  <!-- Оболочка приложения с правильным отступом снизу для скролла -->
   <div class="max-w-md mx-auto relative pb-32 border-x border-slate-800/60 min-h-screen flex flex-col">
 
     <!-- Header -->
@@ -61,7 +60,7 @@
     <!-- Основное содержимое -->
     <main id="app-content" class="flex-1 p-4 space-y-4"></main>
 
-    <!-- Нижнее Навигационное меню (Фиксировано) -->
+    <!-- Нижнее Навигационное меню -->
     <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-card border-t border-slate-800/80 flex justify-around py-2 px-1 z-50">
       <button onclick="switchTab('itinerary')" id="tab-itinerary" class="nav-btn active flex flex-col items-center py-1.5 px-1.5 text-slate-400 transition-all">
         <span class="text-base">📅</span>
@@ -94,7 +93,7 @@
           day: "День 1", date: "25 Октября", badge: "Перелет", title: "Вылет и транзит в Сеуле",
           steps: [
             { time: "00:05", text: "Вылет из Алматы (KC 909, Т2). В пути 5ч 50мин." },
-            { time: "09:55", text: "Прилет в Сеул (ICN, Т1). Прохождение K-ETA.", query: "Incheon International Airport" },
+            { time: "09:55", text: "Прилет в Сеул (ICN, Т1). Прохождение K-ETA.", query: "Incheon International Airport Terminal 1" },
             { time: "11:30", text: "Выезд в город на автобусе 6001 до Мёндон или Nap Zone (Т1, 4 этаж)." },
             { time: "21:30", text: "Вылет из Сеула в Токио (OZ 178). Вылет из Т2!" },
             { time: "23:25", text: "Приземление в Токио (Ханеда, Т3). Visit Japan Web.", query: "Haneda Airport Terminal 3" }
@@ -104,8 +103,8 @@
           day: "День 2", date: "26 Октября", badge: "Адаптация", title: "Ошиаге и Асакуса",
           steps: [
             { time: "09:00", text: "Завтрак из FamilyMart (свежее молоко, Shokupan)." },
-            { time: "10:30", text: "Прогулка у Skytree и ТЦ Solamachi. Супермаркет LIFE.", query: "Tokyo Skytree Solamachi" },
-            { time: "15:00", text: "Храм Сэнсо-дзи и улица Накамисэ-дори.", query: "Sensō-ji Temple Tokyo" }
+            { time: "10:30", text: "Прогулка у Skytree и ТЦ Solamachi. Супермаркет LIFE.", query: "Tokyo Skytree" },
+            { time: "15:00", text: "Храм Сэнсо-дзи и улица Накамисэ-дори.", query: "Sensō-ji" }
           ]
         },
         {
@@ -123,7 +122,7 @@
           day: "День 4", date: "28 Октября", badge: "Прогулка", title: "Акихабара и Парк Уэно",
           steps: [
             { time: "10:00", text: "Парк Уэно, прогулка у пруда Синобадзу.", query: "Ueno Park" },
-            { time: "14:00", text: "Акихабара: Yodobashi Camera (6 этаж — игрушки).", query: "Yodobashi Camera Akiba" }
+            { time: "14:00", text: "Акихабара: Yodobashi Camera (6 этаж — игрушки).", query: "Yodobashi-Akiba" }
           ]
         },
         {
@@ -137,71 +136,152 @@
       districts: [
         {
           name: "Сумида (Sumida / Oshiage)",
-          tag: "Базовый район поездки",
-          history: "Историческая ремесленная окраина (Заречье) старого Эдо. В 2012 году здесь возвели башню Tokyo Skytree, превратив район в современный семейный центр.",
-          atmosphere: "Спокойный, спальный, предельно безопасный и семейный район с духом старого Токио (shitamachi). Отсутствие шумных ночных клубов.",
-          residents: "Молодые японские семьи с детьми, пожилые коренные жители Эдо.",
-          architecture: "Контраст: ультрасовременная башня Skytree рядом с узкими тихими улочками и 2-3 этажными частными домами.",
-          realEstate: "Покупка: ~$7,000–$9,000 / м². Аренда 1К: ~$750–$950 / мес. Относительно доступно для Токио.",
-          spots: ["Tokyo Skytree & ТЦ Solamachi", "Музей Сумо (Ryogoku Kokugikan)", "Парк Сумида вдоль реки"]
+          tag: "Базовый семейный район",
+          history: "Историческая ремесленная окраина старого Эдо. В 2012 году возведена телебашня Skytree.",
+          atmosphere: "Тихий, уютный и спальный район с развитой инфраструктурой для семей с детьми.",
+          residents: "Молодые японские семьи, пенсионеры.",
+          architecture: "Ультрасовременный комплексы рядом с low-rise частной застройкой.",
+          realEstate: "Покупка: ~$7,500/м². Аренда: ~$850/мес.",
+          spots: ["Tokyo Skytree", "Solamachi", "Музей Сумо Ryogoku"]
+        },
+        {
+          name: "Асакуса / Тайто (Asakusa)",
+          tag: "Культура & Дух Старого Токио",
+          history: "Главный развлекательный и храмовый центр Токио эпохи Эдо.",
+          atmosphere: "Насыщенный дух традиционной Японии, рикши, сувенирные лавки и храмовые комплексы.",
+          residents: "Ремесленники, владельцы традиционного бизнеса, туристы.",
+          architecture: "Древние пагоды, храмовые ворота и плотные торгово-пешеходные улицы.",
+          realEstate: "Покупка: ~$8,500/м². Аренда: ~$950/мес.",
+          spots: ["Храм Сэнсо-дзи", "Улица Накамисэ", "Парк Асакуса"]
         },
         {
           name: "Сибуя (Shibuya)",
-          tag: "Центр молодежи и трендов",
-          history: "В эпоху Эдо — феодальная усадьба, затем ж/д узловая станция. В 1970-х стала центром молодежной моды и поп-культуры.",
-          atmosphere: "Неоновый гигант, непрерывный поток людей, музыка, мода, стартапы и энергия.",
-          residents: "Студенты, молодые IT-предприниматели, экспаты, дизайнеры.",
-          architecture: "Футуристические небоскребы (Shibuya Scramble Square) и хаотичные переулки с неоновыми вывесками.",
-          realEstate: "Покупка: ~$14,000–$20,000 / м². Аренда 1К: ~$1,400–$2,000 / мес. Один из самых дорогих районов.",
-          spots: ["Перекресток Shibuya Crossing", "Статуя Хатико", "Парк Йойоги & Храм Мэйдзи"]
-        },
-        {
-          name: "Гинза (Ginza)",
-          tag: "Роскошь и Высокая мода",
-          history: "В XVII веке здесь чеканили серебряные монеты (название означает «серебряный двор»). В XIX веке стала первым европейским кварталом Токио.",
-          atmosphere: "Аристократизм, безупречная чистота, тихий люкс, дорогие рестораны и галереи.",
-          residents: "Зажиточные бизнесмены, дипломаты, ценители искусства.",
-          architecture: "Западный стиль XIX века, монументальные гранитные фасады, флагманские бутики с премиальной стеклянной архитектурой.",
-          realEstate: "Покупка: от $25,000+ / м². Аренда: от $2,200+ / мес. Элитный сегмент.",
-          spots: ["Театр Кабуки-дза", "ТЦ Ginza Six", "Улица Chuo-dori (пешеходная по выходным)"]
+          tag: "Молодежь & Тренды",
+          history: "В XIX веке железнодорожный узел, ставший в 1970-х эпицентром мировой молодежной моды.",
+          atmosphere: "Безумный ритм, неоновые огни, перекрестки-гиганты и флагманские магазины.",
+          residents: "Студенты, IT-предприниматели, блогеры, дизайнеры.",
+          architecture: "Футуристические стеклянные башне-комплексы и подземные лабиринты.",
+          realEstate: "Покупка: ~$16,000/м². Аренда: ~$1,600/мес.",
+          spots: ["Shibuya Crossing", "Shibuya Sky", "Хатико"]
         },
         {
           name: "Синдзюку (Shinjuku)",
-          tag: "Деловой & Ночной мегаполис",
-          history: "Бывшая почтовая станция на тракте. После землетрясения 1923 года превратилась в главный высотный деловой центр столицы.",
-          atmosphere: "Днем — строгие костюмы и офисы, вечером — неон, бары, уличная еда и развлечения.",
-          residents: "Офисные служащие (сарариманы), иностранные студенты, экспаты.",
-          architecture: "Лес гигантских небоскребов (включая Мэрию Токио) и узкие исторические переулки Omoide Yokocho.",
-          realEstate: "Покупка: ~$12,000–$17,000 / м². Аренда 1К: ~$1,200–$1,700 / мес.",
-          spots: ["Смотровая площадка Мэрии", "Парк Shinjuku Gyoen", "Переулок Omoide Yokocho"]
+          tag: "Деловой & Ночной Мегаполис",
+          history: "Бывшая почтовая станция, превращенная после 1960-х в главный деловой высотный центр.",
+          atmosphere: "Офисный гигант днем, эпицентр баров и развлечений вечером.",
+          residents: "Сарариманы (офисные работники), экспаты, иностранные студенты.",
+          architecture: "Небоскребы-гиганты высотой 200m+ и узкие исторические переулки.",
+          realEstate: "Покупка: ~$14,000/м². Аренда: ~$1,400/мес.",
+          spots: ["Мэрия Токио", "Парк Shinjuku Gyoen", "Omoide Yokocho"]
+        },
+        {
+          name: "Гинза (Ginza)",
+          tag: "Премиум & Престиж",
+          history: "Район чеканки серебряных монет в XVII веке, затем первый европеизированный квартал.",
+          atmosphere: "Тихий аристократический люкс, бутиковый шопинг и высокая кухня.",
+          residents: "Зажиточные бизнесмены, инвесторы, коллекционеры.",
+          architecture: "Монументальные европейские фасады, премиум-стекло и старинные универмаги.",
+          realEstate: "Покупка: ~$25,000+/м². Аренда: ~$2,200+/мес.",
+          spots: ["Театр Кабуки-дза", "Ginza Six", "Uniqlo Flagship"]
+        },
+        {
+          name: "Акихабара (Akihabara)",
+          tag: "Электроника & Поп-культура",
+          history: "После Второй мировой — «черный рынок» радиодеталей, выросший в главную электро-столицу.",
+          atmosphere: "Аниме, манга, ретро-игры, многоэтажные магазины электроники и геймерские центры.",
+          residents: "Отаку, программисты, инженеры, фанаты поп-культуры.",
+          architecture: "Фасады с медиа-экранами, рекламными баннерами аниме и многоэтажные ТЦ.",
+          realEstate: "Покупка: ~$11,000/м². Аренда: ~$1,100/мес.",
+          spots: ["Yodobashi Camera", "Radio Kaikan", "Super Potato"]
+        },
+        {
+          name: "Роппонги (Roppongi)",
+          tag: "Международный & Экспат-центр",
+          history: "Место дислокации военных баз после войны, ставшее центром ночной жизни и посольств.",
+          atmosphere: "Международный бизнес, арт-галереи, элитные жилые комплексы и иностранные рестораны.",
+          residents: "Иностранные топ-менеджеры, дипломаты, арт-деятели.",
+          architecture: "Современные комплексы «город в городе» (Roppongi Hills) и арт-музеи.",
+          realEstate: "Покупка: ~$18,000/м². Аренда: ~$1,900/мес.",
+          spots: ["Roppongi Hills", "Mori Art Museum", "Tokyo Midtown"]
+        },
+        {
+          name: "Одайба (Odaiba)",
+          tag: "Футуристический Остров",
+          history: "Искусственный остров-форт XIX века, перестроенный в 1990-х в главный футуристический курорт.",
+          atmosphere: "Морской бриз, семейный отдых, гигантские торговые моллы и виды на залив.",
+          residents: "Молодые семьи из высокотехнологичных отраслей.",
+          architecture: "Хайтек-здание Fuji TV, Мост Радуги, огромные променады.",
+          realEstate: "Покупка: ~$9,500/м². Аренда: ~$1,150/мес.",
+          spots: ["Мост Радуги", "Статуя Гандама", "Gundam Base Tokyo"]
         }
       ],
       shoppingSpots: [
         {
           category: "Традиционные рынки",
           items: [
-            { name: "Рынок Амэёко (Ameyoko)", location: "Уэно", desc: "Уличный рынок под ж/д путями. Свежие фрукты, морепродукты, сувениры, доступная одежда.", query: "Ameyoko Shopping Street" },
-            { name: "Внешний рынок Цукидзи", location: "Цукидзи", desc: "Гастрономический рынок. Вагю на гриле, свежие морепродукты и клубничные десерты.", query: "Tsukiji Outer Market" }
+            {
+              name: "Внешний рынок Цукидзи (Tsukiji Outer Market)",
+              location: "Цукидзи",
+              schedule: "⏰ 08:00 – 14:00",
+              closedDays: "🚫 Выходной: Воскресенье, праздники и некоторые среды",
+              desc: "Главный гастрономический рынок. Свежий тунец, вагю на гриле, запеченные устрицы и омлеты Тамагояки.",
+              query: "Tsukiji Outer Market"
+            },
+            {
+              name: "Рынок Амэёко (Ameyoko Market)",
+              location: "Уэно",
+              schedule: "⏰ 10:00 – 19:00",
+              closedDays: "🚫 Выходной: Отдельные лавки закрыты по средам",
+              desc: "Шумный уличный рынок под ж/д путями. Огромные скидки на фрукты, морепродукты, кроссовки и сувениры.",
+              query: "Ameyoko Shopping Street"
+            }
           ]
         },
         {
           category: "Торговые центры и Моллы",
           items: [
-            { name: "Tokyo Solamachi", location: "Ошиаге", desc: "Более 300 магазинов. Pokemon Center, Ghibli Donguri, супермаркет LIFE.", query: "Tokyo Solamachi" },
-            { name: "Yodobashi Camera Akiba", location: "Акихабара", desc: "9 этажей электроники, техники, детских игрушек и моделей с Tax-Free.", query: "Yodobashi Camera Akiba" },
-            { name: "Shibuya Parco", location: "Сибуя", desc: "Магазин Nintendo Tokyo, Pokemon Center и современные бренды одежды.", query: "Shibuya Parco" }
+            {
+              name: "Tokyo Solamachi",
+              location: "Ошиаге",
+              schedule: "⏰ 10:00 – 21:00 (без выходных)",
+              closedDays: "🚫 Выходных нет",
+              desc: "Более 300 магазинов прямо у дома. Pokemon Center, Ghibli Store, супермаркет LIFE.",
+              query: "Tokyo Solamachi"
+            },
+            {
+              name: "Yodobashi Camera Akiba",
+              location: "Акихабара",
+              schedule: "⏰ 09:30 – 22:00 (без выходных)",
+              closedDays: "🚫 Выходных нет",
+              desc: "9 этажей электроники, фототехники, часов, бытовой техники и гигантский этаж детских игрушек.",
+              query: "Yodobashi Akiba"
+            },
+            {
+              name: "Shibuya Parco",
+              location: "Сибуя",
+              schedule: "⏰ 11:00 – 21:00 (без выходных)",
+              closedDays: "🚫 Выходных нет",
+              desc: "Флагманский магазин Nintendo Tokyo, Pokemon Center, Capcom Store и мода.",
+              query: "Shibuya Parco"
+            }
           ]
         },
         {
-          category: "Сети и Гипермаркеты",
+          category: "Гипермаркеты и Дискаунтеры",
           items: [
-            { name: "MEGA Don Quijote", location: "Сибуя / Асакуса", desc: "Огромный круглосуточный дискаунтер. Японские сладости, косметика, сувениры.", query: "MEGA Don Quijote Shibuya" },
-            { name: "Uniqlo Ginza Flagship", location: "Гинза", desc: "12 этажей крупнейшего в мире магазина Uniqlo со специальной детской зоной.", query: "Uniqlo Ginza" }
+            {
+              name: "MEGA Don Quijote Shibuya",
+              location: "Сибуя",
+              schedule: "⏰ Круглосуточно 24/7",
+              closedDays: "🚫 Без выходных",
+              desc: "Огромный 7-этажный дискаунтер: японские сладости, косметика, сувениры, бытовая химия. Оформление Tax-Free на месте.",
+              query: "MEGA Don Quijote Shibuya"
+            }
           ]
         }
       ],
       insiderGuides: [
-        { title: "Жизнь в Ошиаге (Sumida)", content: "Супермаркет LIFE в ТЦ Solamachi открыт с 10:00 до 21:00. Скидки до 50% на готовую еду появляются после 19:00. Выход B3 со станции Oshiage оснащен лифтами прямо к улице." },
+        { title: "Жизнь в Ошиаге (Sumida)", content: "Супермаркет LIFE в ТЦ Solamachi открыт с 10:00 до 21:00. Скидки до 50% на готовую еду (суши, бенто) появляются после 19:00. Выход B3 со станции Oshiage оснащен лифтами прямо к улице." },
         { title: "Особенности Tokyo Disneyland", content: "Покупайте билеты заранее через приложение. Внутри доступна аренда детских колясок (1000 иен). Пользуйтесь услугой Rider Switch на аттракционах." }
       ],
       phrases: [
@@ -221,8 +301,10 @@
       document.getElementById('res-usd').innerText = '$' + (jpy / 150).toFixed(1) + ' USD';
     }
 
+    // Рабочая функция открытия Google Maps
     function openMap(query) {
-      window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+      const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
+      window.open(url, '_blank');
     }
 
     function switchTab(tabName) {
@@ -253,14 +335,14 @@
                       <span class="bg-slate-900 text-indigo-400 px-1.5 py-0.5 rounded font-mono text-[10px] border border-slate-800 shrink-0">${s.time}</span>
                       <span>${s.text}</span>
                     </div>
-                    ${s.query ? `<button onclick="openMap('${s.query}')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-indigo-300 px-2 py-0.5 rounded border border-slate-700 shrink-0">📍 Карта</button>` : ''}
+                    ${s.query ? `<button onclick="openMap('${s.query}')" class="text-[10px] bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30 shrink-0">📍 Карта</button>` : ''}
                   </div>
                 `).join('')}
               </div>
             </div>
           `).join('');
       } else if (tabName === 'districts') {
-        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Районы Токио & Недвижимость</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Районы Токио (${TRIP_DATA.districts.length})</h2>` +
           TRIP_DATA.districts.map(dist => `
             <div class="glass-card p-4 rounded-2xl mb-3.5 space-y-2">
               <div class="flex justify-between items-start">
@@ -270,7 +352,7 @@
               <p class="text-xs text-slate-300 leading-relaxed">${dist.atmosphere}</p>
               
               <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 space-y-1 text-[11px]">
-                <div class="text-indigo-400 font-semibold">🏠 Недвижимость:</div>
+                <div class="text-indigo-400 font-semibold">🏠 Средние цены на недвижимость:</div>
                 <div class="text-slate-300">${dist.realEstate}</div>
               </div>
 
@@ -291,10 +373,14 @@
             <div class="mb-4">
               <h3 class="text-xs font-bold text-slate-400 uppercase mb-2 pl-1">${sec.category}</h3>
               ${sec.items.map(item => `
-                <div class="glass-card p-3.5 rounded-2xl mb-2.5 space-y-1.5">
+                <div class="glass-card p-3.5 rounded-2xl mb-2.5 space-y-2">
                   <div class="flex justify-between items-start">
                     <div class="text-sm font-bold text-white">${item.name}</div>
                     <button onclick="openMap('${item.query}')" class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full font-semibold">📍 На карте</button>
+                  </div>
+                  <div class="text-[11px] text-amber-400 font-medium space-y-0.5 bg-amber-500/10 p-2 rounded-xl border border-amber-500/20">
+                    <div>${item.schedule}</div>
+                    <div>${item.closedDays}</div>
                   </div>
                   <div class="text-xs text-slate-300 leading-relaxed">${item.desc}</div>
                 </div>
