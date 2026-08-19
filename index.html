@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tokyo Family Guide 2026</title>
 
+  <!-- Только Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     .glass-card {
@@ -43,16 +43,16 @@
 
   <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-card border-t border-slate-800/80 flex justify-around py-2 px-1 z-50">
     <button onclick="switchTab('itinerary')" id="tab-itinerary" class="nav-btn active flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
-      <i data-lucide="calendar" class="w-4 h-4"></i>
-      <span class="text-[9px] font-semibold mt-1">Маршрут</span>
+      <span class="text-base">📅</span>
+      <span class="text-[9px] font-semibold mt-0.5">Маршрут</span>
     </button>
     <button onclick="switchTab('insider')" id="tab-insider" class="nav-btn flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
-      <i data-lucide="book-open" class="w-4 h-4"></i>
-      <span class="text-[9px] font-semibold mt-1">База знаний</span>
+      <span class="text-base">📖</span>
+      <span class="text-[9px] font-semibold mt-0.5">База знаний</span>
     </button>
     <button onclick="switchTab('phrases')" id="tab-phrases" class="nav-btn flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
-      <i data-lucide="languages" class="w-4 h-4"></i>
-      <span class="text-[9px] font-semibold mt-1">Разговорник</span>
+      <span class="text-base">🗣️</span>
+      <span class="text-[9px] font-semibold mt-0.5">Разговорник</span>
     </button>
   </nav>
 
@@ -158,8 +158,6 @@
             </div>
           `).join('');
       }
-      
-      if (window.lucide) lucide.createIcons();
     }
 
     function speakJP(text) {
@@ -170,7 +168,10 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => switchTab('itinerary'));
+    // Запуск сразу после загрузки DOM
+    window.onload = function() {
+      switchTab('itinerary');
+    };
   </script>
 </body>
 </html>
