@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  switchTab('timeline');
+  switchTab('itinerary');
 });
 
 function switchTab(tabName) {
@@ -15,74 +15,41 @@ function switchTab(tabName) {
     }
   });
 
-  if (tabName === 'timeline') {
+  if (tabName === 'itinerary') {
     container.innerHTML = `
-      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-indigo-400"></i> График полетов и транзита</h2>
-      <div class="space-y-3">
-        ${TRIP_DATA.flights.map((f, i) => `
-          <div class="glass-card p-4 rounded-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-rose-500"></div>
-            <div class="flex justify-between items-center mb-1.5">
-              <span class="text-[11px] font-bold bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-md border border-indigo-500/30">${f.date} • ${f.time}</span>
-              <span class="text-[10px] text-slate-500">Этап ${i+1}</span>
-            </div>
-            <h3 class="font-bold text-white text-sm mt-1">${f.title}</h3>
-            <p class="text-xs text-slate-400 mt-1 leading-relaxed">${f.detail}</p>
-            ${f.alert ? `<div class="mt-2.5 pt-2 border-t border-slate-800/80 text-[11px] text-rose-300 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i> ${f.alert}</div>` : ''}
-          </div>
-        `).join('')}
-      </div>
-    `;
-  } else if (tabName === 'map') {
-    container.innerHTML = `
-      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="navigation" class="w-4 h-4 text-indigo-400"></i> Точки возле дома (Ошиаге)</h2>
-      <div class="grid gap-3">
-        ${TRIP_DATA.places.map(p => `
-          <div class="glass-card p-4 rounded-2xl flex justify-between items-start gap-3">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-indigo-400 px-2 py-0.5 rounded-md border border-slate-700">${p.category}</span>
-                <span class="text-[10px] text-emerald-400 font-bold">${p.dist}</span>
-              </div>
-              <h3 class="font-bold text-white text-sm">${p.name}</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">${p.desc}</p>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  } else if (tabName === 'districts') {
-    container.innerHTML = `
-      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="building-2" class="w-4 h-4 text-indigo-400"></i> Районы Токио</h2>
+      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-indigo-400"></i> Подневный план поездки</h2>
       <div class="space-y-4">
-        ${TRIP_DATA.districts.map(d => `
+        ${TRIP_DATA.dailyItinerary.map(d => `
           <div class="glass-card p-4 rounded-2xl border-l-4 border-indigo-500">
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-300 px-2.5 py-0.5 rounded-md border border-indigo-500/20">${d.tag}</span>
-            <h3 class="font-extrabold text-white text-base mt-2 mb-2">${d.name}</h3>
-            
-            <div class="space-y-2 text-xs text-slate-300">
-              <p><strong class="text-indigo-300">🏛 Архитектура:</strong> ${d.arch}</p>
-              <p><strong class="text-emerald-300">📍 Главные места:</strong> ${d.spots}</p>
-              <p><strong class="text-amber-300">💡 Тонкости:</strong> ${d.quirks}</p>
-              <p><strong class="text-rose-300">✨ Факт:</strong> ${d.funFact}</p>
-              <div class="mt-3 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-                <strong>💰 Экономика района:</strong> ${d.prices}
-              </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-md border border-indigo-500/30">${d.day} • ${d.date}</span>
+              <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded">${d.badge}</span>
+            </div>
+            <h3 class="font-bold text-white text-base mb-3">${d.title}</h3>
+            <div class="space-y-2 border-t border-slate-800/80 pt-2.5">
+              ${d.steps.map(s => `
+                <div class="flex items-start gap-2.5 text-xs">
+                  <span class="font-bold text-indigo-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 flex-shrink-0">${s.time}</span>
+                  <span class="text-slate-300 leading-relaxed">${s.text}</span>
+                </div>
+              `).join('')}
             </div>
           </div>
         `).join('')}
       </div>
     `;
-  } else if (tabName === 'culture') {
+  } else if (tabName === 'insider') {
     container.innerHTML = `
-      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i> Культура и Традиции</h2>
+      <h2 class="font-extrabold text-white text-sm mb-3 flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i> Japan Insider (База знаний)</h2>
       <div class="space-y-3">
-        ${TRIP_DATA.culture.map(c => `
+        ${TRIP_DATA.insiderGuides.map(g => `
           <div class="glass-card p-4 rounded-2xl">
-            <h3 class="font-bold text-indigo-300 text-sm mb-1.5 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> ${c.title}
+            <h3 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+              <i data-lucide="${g.icon}" class="w-4 h-4 text-indigo-400"></i> ${g.title}
             </h3>
-            <p class="text-xs text-slate-300 leading-relaxed">${c.desc}</p>
+            <div class="border-t border-slate-800/80 pt-2.5">
+              ${g.content}
+            </div>
           </div>
         `).join('')}
       </div>
