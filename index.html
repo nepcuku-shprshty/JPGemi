@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tokyo Family Guide 2026</title>
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -26,7 +24,6 @@
 </head>
 <body class="h-full flex flex-col max-w-md mx-auto bg-slate-950 font-sans relative pb-24 border-x border-slate-800/60 min-h-screen">
 
-  <!-- Header -->
   <header class="sticky top-0 z-50 glass-card px-5 py-4 border-b border-slate-800/80 flex justify-between items-center">
     <div class="flex items-center gap-2.5">
       <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-rose-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30 text-xs">
@@ -42,12 +39,8 @@
     </span>
   </header>
 
-  <!-- Main Content Container -->
-  <main id="app-content" class="flex-1 p-4 space-y-4">
-    <!-- Контент рендерится через JS -->
-  </main>
+  <main id="app-content" class="flex-1 p-4 space-y-4"></main>
 
-  <!-- Navigation Bar -->
   <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-card border-t border-slate-800/80 flex justify-around py-2 px-1 z-50">
     <button onclick="switchTab('itinerary')" id="tab-itinerary" class="nav-btn active flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
       <i data-lucide="calendar" class="w-4 h-4"></i>
@@ -63,41 +56,13 @@
     </button>
   </nav>
 
-  <script>
-    const TRIP_DATA = {
-      dailyItinerary: [
-        {
-          day: "День 1", date: "25 Октября", badge: "Перелет", title: "Вылет и длинный транзит в Сеуле",
-          steps: [
-            { time: "00:05", text: "Вылет из Алматы (KC 909, Т2). Время в пути 5ч 50мин." },
-            { time: "09:55", text: "Прилет в Сеул (ICN, Т1). Прохождение границы (K-ETA)." },
-            { time: "11:30", text: "Выезд в город на автобусе 6001 до ул. Мёндон или отдых в Nap Zone (4 этаж)." },
-            { time: "21:30", text: "Вылет из Сеула в Токио (OZ 178). Вылет из Т2!" },
-            { time: "23:25", text: "Приземление в Токио (Ханеда, Т3). QR Visit Japan Web." }
-          ]
-        },
-        {
-          day: "День 2", date: "26 Октября", badge: "Адаптация", title: "Ошиаге и Асакуса",
-          steps: [
-            { time: "09:00", text: "Завтрак из FamilyMart (свежее молоко, Shokupan)." },
-            { time: "10:30", text: "Прогулка вокруг Skytree и ТЦ Solamachi. Супермаркет LIFE." },
-            { time: "15:00", text: "Храм Сэнсо-дзи и улица Накамисэ-дори." }
-          ]
-        }
-      ],
-      insiderGuides: [
-        { title: "Жизнь в Ошиаге (Sumida)", content: "Супермаркет LIFE в ТЦ Solamachi открыт с 10:00 до 21:00. Скидки на готовую еду после 19:00. Выход B3 со станции Oshiage имеет лифты прямо к улице." },
-        { title: "Транзит в Сеуле (ICN)", content: "Туда: прилет в Т1, вылет из Т2. Обратно: прилет в Т2 в 04:10 утра, идите в Nap Zone на 4 этаже Т2 (бесплатный отдых)." }
-      ],
-      phrases: [
-        { ru: "Где находится лифт?", jp: "エレベーターはどこですか？", romaji: "Erebētā wa doko desu ka?", tag: "Коляска" },
-        { ru: "Есть комната матери и ребенка?", jp: "赤ちゃんルームはありますか？", romaji: "Aka-chan rūmu wa arimasu ka?", tag: "Малыш" },
-        { ru: "Разогрейте это, пожалуйста", jp: "温めてください", romaji: "Atatamete kudasai", tag: "Магазин" }
-      ]
-    };
+  <!-- Подключение файла данных с обходом кэша -->
+  <script src="./data.js?v=2026" charset="utf-8"></script>
 
+  <script>
     function switchTab(tabName) {
       const container = document.getElementById("app-content");
+      if (!window.TRIP_DATA) return;
       
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('active', 'text-indigo-400');
@@ -111,9 +76,9 @@
       }
 
       if (tabName === 'itinerary') {
-        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Подневный план</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Подневный план (${TRIP_DATA.dailyItinerary.length} дней)</h2>` +
           TRIP_DATA.dailyItinerary.map(d => `
-            <div class="glass-card p-4 rounded-2xl space-y-2">
+            <div class="glass-card p-4 rounded-2xl space-y-2 mb-3">
               <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-wide">${d.day} • ${d.date} (${d.badge})</div>
               <div class="text-sm font-bold text-white">${d.title}</div>
               <div class="border-t border-slate-800 pt-2 space-y-2">
@@ -129,7 +94,7 @@
       } else if (tabName === 'insider') {
         container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Japan Insider</h2>` +
           TRIP_DATA.insiderGuides.map(g => `
-            <div class="glass-card p-4 rounded-2xl space-y-1.5">
+            <div class="glass-card p-4 rounded-2xl space-y-1.5 mb-3">
               <div class="text-sm font-bold text-white">${g.title}</div>
               <div class="text-xs text-slate-300 leading-relaxed">${g.content}</div>
             </div>
@@ -137,7 +102,7 @@
       } else if (tabName === 'phrases') {
         container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Разговорник</h2>` +
           TRIP_DATA.phrases.map(p => `
-            <div class="glass-card p-3.5 rounded-2xl flex justify-between items-center gap-3">
+            <div class="glass-card p-3.5 rounded-2xl flex justify-between items-center gap-3 mb-3">
               <div>
                 <div class="text-[9px] font-bold text-slate-400 uppercase">${p.tag} • ${p.ru}</div>
                 <div class="text-base font-bold text-white my-0.5">${p.jp}</div>
@@ -150,9 +115,7 @@
           `).join('');
       }
       
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+      if (window.lucide) lucide.createIcons();
     }
 
     function speakJP(text) {
@@ -163,9 +126,7 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      switchTab('itinerary');
-    });
+    document.addEventListener("DOMContentLoaded", () => switchTab('itinerary'));
   </script>
 </body>
 </html>
