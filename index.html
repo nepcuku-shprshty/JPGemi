@@ -56,13 +56,57 @@
     </button>
   </nav>
 
-  <!-- Подключение файла данных с обходом кэша -->
-  <script src="./data.js?v=2026" charset="utf-8"></script>
-
   <script>
+    const TRIP_DATA = {
+      dailyItinerary: [
+        {
+          day: "День 1", date: "25 Октября", badge: "Перелет", title: "Вылет и длинный транзит в Сеуле",
+          steps: [
+            { time: "00:05", text: "Вылет из Алматы (KC 909, Т2). Время в пути 5ч 50мин." },
+            { time: "09:55", text: "Прилет в Сеул (ICN, Т1). Прохождение границы (K-ETA)." },
+            { time: "11:30", text: "Выезд в город на автобусе 6001 до ул. Мёндон или отдых в Nap Zone (4 этаж)." },
+            { time: "21:30", text: "Вылет из Сеула в Токио (OZ 178). Вылет из Т2!" },
+            { time: "23:25", text: "Приземление в Токио (Ханеда, Т3). QR Visit Japan Web." }
+          ]
+        },
+        {
+          day: "День 2", date: "26 Октября", badge: "Адаптация", title: "Ошиаге и Асакуса",
+          steps: [
+            { time: "09:00", text: "Завтрак из FamilyMart (свежее молоко, Shokupan)." },
+            { time: "10:30", text: "Прогулка вокруг Skytree и ТЦ Solamachi. Супермаркет LIFE." },
+            { time: "15:00", text: "Храм Сэнсо-дзи и улица Накамисэ-дори." }
+          ]
+        },
+        {
+          day: "День 3", date: "27 Октября", badge: "Развлечения", title: "Акихабара и Уэно",
+          steps: [
+            { time: "10:00", text: "Парк Уэно, прогулка у пруда Синобадзу." },
+            { time: "14:00", text: "Акихабара: Yodobashi Camera (детский отдел игрушек)." }
+          ]
+        },
+        {
+          day: "День 12", date: "05 Ноября", badge: "Возвращение", title: "Вылет домой через Сеул",
+          steps: [
+            { time: "04:10", text: "Прилет в Сеул (ICN, Т2). Идем в Nap Zone на 4 этаже." },
+            { time: "13:00", text: "Вылет обратно в Алматы." }
+          ]
+        }
+      ],
+      insiderGuides: [
+        { title: "Жизнь в Ошиаге (Sumida)", content: "Супермаркет LIFE в ТЦ Solamachi открыт с 10:00 до 21:00. Скидки на готовую еду после 19:00. Выход B3 со станции Oshiage имеет лифты прямо к улице." },
+        { title: "Транзит в Сеуле (ICN)", content: "Туда: прилет в Т1, вылет из Т2. Обратно: прилет в Т2 в 04:10 утра, идите в Nap Zone на 4 этаже Т2 (бесплатный отдых)." },
+        { title: "Комнаты матери и ребенка", content: "В ТЦ Solamachi и на крупных станциях есть Baby Care Rooms с горячей водой для смеси, пеленальными столами и приватными зонами." }
+      ],
+      phrases: [
+        { ru: "Где находится лифт?", jp: "エレベーターはどこですか？", romaji: "Erebētā wa doko desu ka?", tag: "Коляска" },
+        { ru: "Есть комната матери и ребенка?", jp: "赤ちゃんルームはありますか？", romaji: "Aka-chan rūmu wa arimasu ka?", tag: "Малыш" },
+        { ru: "Разогрейте это, пожалуйста", jp: "温めてください", romaji: "Atatamete kudasai", tag: "Магазин" },
+        { ru: "Где находится туалет?", jp: "お手洗いはどこですか？", romaji: "Oterai wa doko desu ka?", tag: "Навигация" }
+      ]
+    };
+
     function switchTab(tabName) {
       const container = document.getElementById("app-content");
-      if (!window.TRIP_DATA) return;
       
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('active', 'text-indigo-400');
@@ -76,7 +120,7 @@
       }
 
       if (tabName === 'itinerary') {
-        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Подневный план (${TRIP_DATA.dailyItinerary.length} дней)</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Подневный план</h2>` +
           TRIP_DATA.dailyItinerary.map(d => `
             <div class="glass-card p-4 rounded-2xl space-y-2 mb-3">
               <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-wide">${d.day} • ${d.date} (${d.badge})</div>
