@@ -1,51 +1,66 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="h-full bg-slate-950 text-slate-100">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tokyo Family Guide 2026</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #0f172a; color: #f8fafc; max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 80px; }
-    
-    header { position: sticky; top: 0; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(10px); padding: 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
-    .logo-badge { background: linear-gradient(135deg, #6366f1, #f43f5e); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; color: #fff; }
-    .badge-tag { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 11px; padding: 4px 8px; border-radius: 12px; font-weight: 600; }
-    
-    main { padding: 16px; }
-    .card { background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
-    .card-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .card-meta { font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; }
-    
-    .step-item { display: flex; gap: 10px; margin-top: 8px; font-size: 13px; color: #cbd5e1; }
-    .step-time { background: #1e293b; color: #818cf8; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; height: fit-content; border: 1px solid #334155; flex-shrink: 0; }
-    
-    nav { position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-top: 1px solid #334155; display: flex; justify-content: space-around; padding: 10px 0; z-index: 50; }
-    .nav-btn { background: none; border: none; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 8px 16px; cursor: pointer; border-radius: 10px; transition: all 0.2s; }
-    .nav-btn.active { color: #818cf8; background: rgba(99, 102, 241, 0.15); }
-    
-    .btn-speak { background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-btn.active {
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+    }
   </style>
 </head>
-<body>
+<body class="h-full flex flex-col max-w-md mx-auto bg-slate-950 font-sans relative pb-24 border-x border-slate-800/60 min-h-screen">
 
-  <header>
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <div class="logo-badge">JP</div>
+  <!-- Header -->
+  <header class="sticky top-0 z-50 glass-card px-5 py-4 border-b border-slate-800/80 flex justify-between items-center">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-rose-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30 text-xs">
+        JP
+      </div>
       <div>
-        <h1 style="font-size: 15px; font-weight: 800; color: #fff;">Tokyo Family Guide</h1>
-        <p style="font-size: 11px; color: #94a3b8;">25 Окт — 05 Ноя 2026 • Сумида</p>
+        <h1 class="font-extrabold text-sm tracking-tight text-white leading-none">Tokyo Family Guide</h1>
+        <p class="text-[10px] text-slate-400 mt-0.5">25 Окт — 05 Ноя 2026 • Сумида</p>
       </div>
     </div>
-    <span class="badge-tag">Oshiage</span>
+    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+      Oshiage
+    </span>
   </header>
 
-  <main id="app-content"></main>
+  <!-- Main Content Container -->
+  <main id="app-content" class="flex-1 p-4 space-y-4">
+    <!-- Контент рендерится через JS -->
+  </main>
 
-  <nav>
-    <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-btn active">Маршрут</button>
-    <button onclick="switchTab('insider')" id="btn-insider" class="nav-btn">База знаний</button>
-    <button onclick="switchTab('phrases')" id="btn-phrases" class="nav-btn">Разговорник</button>
+  <!-- Navigation Bar -->
+  <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-card border-t border-slate-800/80 flex justify-around py-2 px-1 z-50">
+    <button onclick="switchTab('itinerary')" id="tab-itinerary" class="nav-btn active flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
+      <i data-lucide="calendar" class="w-4 h-4"></i>
+      <span class="text-[9px] font-semibold mt-1">Маршрут</span>
+    </button>
+    <button onclick="switchTab('insider')" id="tab-insider" class="nav-btn flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
+      <i data-lucide="book-open" class="w-4 h-4"></i>
+      <span class="text-[9px] font-semibold mt-1">База знаний</span>
+    </button>
+    <button onclick="switchTab('phrases')" id="tab-phrases" class="nav-btn flex flex-col items-center py-1.5 px-3 text-slate-400 transition-all">
+      <i data-lucide="languages" class="w-4 h-4"></i>
+      <span class="text-[9px] font-semibold mt-1">Разговорник</span>
+    </button>
   </nav>
 
   <script>
@@ -83,40 +98,60 @@
 
     function switchTab(tabName) {
       const container = document.getElementById("app-content");
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`btn-${tabName}`).classList.add('active');
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active', 'text-indigo-400');
+        btn.classList.add('text-slate-400');
+      });
+      
+      const activeBtn = document.getElementById(`tab-${tabName}`);
+      if(activeBtn) {
+        activeBtn.classList.add('active', 'text-indigo-400');
+        activeBtn.classList.remove('text-slate-400');
+      }
 
       if (tabName === 'itinerary') {
-        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Подневный план</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Подневный план</h2>` +
           TRIP_DATA.dailyItinerary.map(d => `
-            <div class="card">
-              <div class="card-meta">${d.day} • ${d.date} (${d.badge})</div>
-              <div class="card-title">${d.title}</div>
-              <div style="border-top: 1px solid #334155; padding-top: 8px;">
-                ${d.steps.map(s => `<div class="step-item"><span class="step-time">${s.time}</span><span>${s.text}</span></div>`).join('')}
+            <div class="glass-card p-4 rounded-2xl space-y-2">
+              <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-wide">${d.day} • ${d.date} (${d.badge})</div>
+              <div class="text-sm font-bold text-white">${d.title}</div>
+              <div class="border-t border-slate-800 pt-2 space-y-2">
+                ${d.steps.map(s => `
+                  <div class="flex gap-2.5 text-xs text-slate-300 items-start">
+                    <span class="bg-slate-900 text-indigo-400 px-1.5 py-0.5 rounded font-mono text-[10px] border border-slate-800 shrink-0">${s.time}</span>
+                    <span>${s.text}</span>
+                  </div>
+                `).join('')}
               </div>
             </div>
           `).join('');
       } else if (tabName === 'insider') {
-        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Japan Insider</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Japan Insider</h2>` +
           TRIP_DATA.insiderGuides.map(g => `
-            <div class="card">
-              <div class="card-title">${g.title}</div>
-              <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;">${g.content}</div>
+            <div class="glass-card p-4 rounded-2xl space-y-1.5">
+              <div class="text-sm font-bold text-white">${g.title}</div>
+              <div class="text-xs text-slate-300 leading-relaxed">${g.content}</div>
             </div>
           `).join('');
       } else if (tabName === 'phrases') {
-        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Разговорник</h2>` +
+        container.innerHTML = `<h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-3">Разговорник</h2>` +
           TRIP_DATA.phrases.map(p => `
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="glass-card p-3.5 rounded-2xl flex justify-between items-center gap-3">
               <div>
-                <div style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">${p.tag} • ${p.ru}</div>
-                <div style="font-size: 15px; font-weight: bold; color: #fff; margin: 2px 0;">${p.jp}</div>
-                <div style="font-size: 11px; color: #818cf8;">${p.romaji}</div>
+                <div class="text-[9px] font-bold text-slate-400 uppercase">${p.tag} • ${p.ru}</div>
+                <div class="text-base font-bold text-white my-0.5">${p.jp}</div>
+                <div class="text-xs text-indigo-400">${p.romaji}</div>
               </div>
-              <button onclick="speakJP('${p.jp}')" class="btn-speak">🔊</button>
+              <button onclick="speakJP('${p.jp}')" class="bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 active:scale-95 transition-transform">
+                🔊
+              </button>
             </div>
           `).join('');
+      }
+      
+      if (window.lucide) {
+        lucide.createIcons();
       }
     }
 
@@ -128,7 +163,9 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => switchTab('itinerary'));
+    document.addEventListener("DOMContentLoaded", () => {
+      switchTab('itinerary');
+    });
   </script>
 </body>
 </html>
