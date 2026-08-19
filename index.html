@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tokyo Family Guide 2026</title>
-  
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: #0f172a; color: #f8fafc; max-width: 480px; margin: 0 auto; min-height: 100vh; padding-bottom: 80px; }
     
-    header { position: sticky; top: 0; background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(10px); padding: 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
-    .logo-badge { background: linear-gradient(135deg, #6366f1, #f43f5e); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+    header { position: sticky; top: 0; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(10px); padding: 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
+    .logo-badge { background: linear-gradient(135deg, #6366f1, #f43f5e); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; color: #fff; }
     .badge-tag { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 11px; padding: 4px 8px; border-radius: 12px; font-weight: 600; }
     
     main { padding: 16px; }
@@ -19,13 +18,13 @@
     .card-meta { font-size: 11px; color: #818cf8; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; }
     
     .step-item { display: flex; gap: 10px; margin-top: 8px; font-size: 13px; color: #cbd5e1; }
-    .step-time { background: #1e293b; color: #818cf8; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; height: fit-content; border: 1px solid #334155; }
+    .step-time { background: #1e293b; color: #818cf8; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; height: fit-content; border: 1px solid #334155; flex-shrink: 0; }
     
     nav { position: fixed; bottom: 0; left: 0; right: 0; max-width: 480px; margin: 0 auto; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-top: 1px solid #334155; display: flex; justify-content: space-around; padding: 10px 0; z-index: 50; }
     .nav-btn { background: none; border: none; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 8px 16px; cursor: pointer; border-radius: 10px; transition: all 0.2s; }
     .nav-btn.active { color: #818cf8; background: rgba(99, 102, 241, 0.15); }
     
-    .btn-speak { background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; margin-top: 6px; }
+    .btn-speak { background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -41,9 +40,7 @@
     <span class="badge-tag">Oshiage</span>
   </header>
 
-  <main id="app-content">
-    <!-- Сюда динамически подгружается контент -->
-  </main>
+  <main id="app-content"></main>
 
   <nav>
     <button onclick="switchTab('itinerary')" id="btn-itinerary" class="nav-btn active">Маршрут</button>
@@ -51,7 +48,87 @@
     <button onclick="switchTab('phrases')" id="btn-phrases" class="nav-btn">Разговорник</button>
   </nav>
 
-  <script src="./data.js" charset="utf-8"></script>
-  <script src="./app.js" charset="utf-8"></script>
+  <script>
+    const TRIP_DATA = {
+      dailyItinerary: [
+        {
+          day: "День 1", date: "25 Октября", badge: "Перелет", title: "Вылет и длинный транзит в Сеуле",
+          steps: [
+            { time: "00:05", text: "Вылет из Алматы (KC 909, Т2). Время в пути 5ч 50мин." },
+            { time: "09:55", text: "Прилет в Сеул (ICN, Т1). Прохождение границы (K-ETA)." },
+            { time: "11:30", text: "Выезд в город на автобусе 6001 до ул. Мёндон или отдых в Nap Zone (4 этаж)." },
+            { time: "21:30", text: "Вылет из Сеула в Токио (OZ 178). Вылет из Т2!" },
+            { time: "23:25", text: "Приземление в Токио (Ханеда, Т3). QR Visit Japan Web." }
+          ]
+        },
+        {
+          day: "День 2", date: "26 Октября", badge: "Адаптация", title: "Ошиаге и Асакуса",
+          steps: [
+            { time: "09:00", text: "Завтрак из FamilyMart (свежее молоко, Shokupan)." },
+            { time: "10:30", text: "Прогулка вокруг Skytree и ТЦ Solamachi. Супермаркет LIFE." },
+            { time: "15:00", text: "Храм Сэнсо-дзи и улица Накамисэ-дори." }
+          ]
+        }
+      ],
+      insiderGuides: [
+        { title: "Жизнь в Ошиаге (Sumida)", content: "Супермаркет LIFE в ТЦ Solamachi открыт с 10:00 до 21:00. Скидки на готовую еду после 19:00. Выход B3 со станции Oshiage имеет лифты прямо к улице." },
+        { title: "Транзит в Сеуле (ICN)", content: "Туда: прилет в Т1, вылет из Т2. Обратно: прилет в Т2 в 04:10 утра, идите в Nap Zone на 4 этаже Т2 (бесплатный отдых)." }
+      ],
+      phrases: [
+        { ru: "Где находится лифт?", jp: "エレベーターはどこですか？", romaji: "Erebētā wa doko desu ka?", tag: "Коляска" },
+        { ru: "Есть комната матери и ребенка?", jp: "赤ちゃんルームはありますか？", romaji: "Aka-chan rūmu wa arimasu ka?", tag: "Малыш" },
+        { ru: "Разогрейте это, пожалуйста", jp: "温めてください", romaji: "Atatamete kudasai", tag: "Магазин" }
+      ]
+    };
+
+    function switchTab(tabName) {
+      const container = document.getElementById("app-content");
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${tabName}`).classList.add('active');
+
+      if (tabName === 'itinerary') {
+        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Подневный план</h2>` +
+          TRIP_DATA.dailyItinerary.map(d => `
+            <div class="card">
+              <div class="card-meta">${d.day} • ${d.date} (${d.badge})</div>
+              <div class="card-title">${d.title}</div>
+              <div style="border-top: 1px solid #334155; padding-top: 8px;">
+                ${d.steps.map(s => `<div class="step-item"><span class="step-time">${s.time}</span><span>${s.text}</span></div>`).join('')}
+              </div>
+            </div>
+          `).join('');
+      } else if (tabName === 'insider') {
+        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Japan Insider</h2>` +
+          TRIP_DATA.insiderGuides.map(g => `
+            <div class="card">
+              <div class="card-title">${g.title}</div>
+              <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;">${g.content}</div>
+            </div>
+          `).join('');
+      } else if (tabName === 'phrases') {
+        container.innerHTML = `<h2 style="font-size: 14px; color: #818cf8; margin-bottom: 12px; font-weight: 700;">Разговорник</h2>` +
+          TRIP_DATA.phrases.map(p => `
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">${p.tag} • ${p.ru}</div>
+                <div style="font-size: 15px; font-weight: bold; color: #fff; margin: 2px 0;">${p.jp}</div>
+                <div style="font-size: 11px; color: #818cf8;">${p.romaji}</div>
+              </div>
+              <button onclick="speakJP('${p.jp}')" class="btn-speak">🔊</button>
+            </div>
+          `).join('');
+      }
+    }
+
+    function speakJP(text) {
+      if ('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ja-JP';
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => switchTab('itinerary'));
+  </script>
 </body>
 </html>
